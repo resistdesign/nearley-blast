@@ -1,0 +1,7 @@
+map items
+  div.nav
+    div.tab
+      button.btn button.btn button.btn
+      div.footer
+    div.tab
+      =label

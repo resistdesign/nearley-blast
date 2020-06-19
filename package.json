@@ -1,0 +1,23 @@
+{
+  "name": "js-912dry",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "rdx serve",
+    "test": "nodemon --watch './src/**/*.*' --exec \"mocha --require resistdesign-babel-register --ui exports './src/**/*.spec.jsx'\""
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^8.0.1",
+    "nearley": "^2.19.4",
+    "nearley-loader": "^2.0.0",
+    "nodemon": "^2.0.4",
+    "raw-loader": "^1.0.0",
+    "rdx": "^4.18.0",
+    "resistdesign-babel-register": "^3.1.0"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
