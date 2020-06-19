@@ -1,7 +1,7 @@
 map items
   div.nav
     div.tab
-      button.btn button.btn button.btn
+      button.btn.primary button.btn.secondary button.btn.btn-large
       div.footer
     div.tab
       =label

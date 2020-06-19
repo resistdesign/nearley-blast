@@ -1,51 +1,44 @@
-input -> line
+input -> line_set new_line:* {% id %}
 
-line
-    -> normalized_value null
-    | normalized_value new_line line
+line_set
+    -> line
+    | line new_line line_set
 
-normalized_value
-    -> value _
-    | indent_set value _
+line -> indent:* value _
 
 value
-    -> command
-    | element
+    -> command {% ([name, arg]) => `{${name}(${arg}, (item, index) => {})}` %}
+    | element {% id %}
 
 command
-    -> map_command
+    -> map_command {% id %}
 
-map_command -> "map" space dot_list
+map_command -> "map" space dot_list {% id %}
 
 element
-    -> dot_list_set
-    | indent_set dot_list_set
-
-dot_list_set
-    -> dot_list
-    | dot_list space dot_list_set
+    -> dot_list {% data => data %}
+    | dot_list space element
 
 dot_list
     -> character_set
-    | character_set "." character_set
-    | character_set "." dot_list
-
-indent_set
-    -> indent
-    | indent indent_set
+    | character_set dot dot_list
 
 indent
-    -> "\t"
-    | space space
+    -> tab {% () => false %}
+    | space space {% () => false %}
+
+new_line -> "\n" {% () => false %}
+
+_ -> (space | tab):* {% () => false %}
+
+dot -> "." {% () => false %}
+
+tab -> "\t" {% () => false %}
+
+space -> " " {% () => false %}
 
 character_set
-    -> character
-    | character character_set
+    -> character {% id %}
+    | character character_set {% data => data.join('') %}
 
-character -> [^ \t.\n]
-
-space -> " "
-
-new_line -> "\n"
-
-_ -> [ \t]:*
+character -> [^ .\t\n] {% data => data.join('') %}
