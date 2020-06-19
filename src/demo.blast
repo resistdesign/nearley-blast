@@ -1,4 +1,4 @@
-map items
+map props.items
   div.nav
     div.tab
       button.btn.primary button.btn.secondary button.btn.btn-large
